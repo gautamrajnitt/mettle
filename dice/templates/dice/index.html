@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Author Meta -->
+	<meta name="author" content="CodePixar">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>Dice roll</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:100,300,500" rel="stylesheet" type="text/css">
+		<!--
+		CSS
+    ============================================= -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	</head>
+	<body>
+      <div class="jumbotron text-center" style="margin-bottom:0">
+          <h1>Dice Game</h1> 
+      </div>
+      <nav class="bg-dark navbar-dark">
+          <p style="text-align: center; color: white;">Click <strong>Roll</strong> to get a random dice roll.<br> You can click on the dice also.</p>
+      </nav>
+          <div class="container" style="margin-top:50px">
+              <div id="info">
+                <label for="rollResult">Numbers on the dice-</label><span id="rollResult"></span><br>
+                <label for="sumResult">Sum of the numbers-</label><span id="sumResult"></span><br>
+                <button type="button" class="btn btn-warning" id="actionBtn">Roll</button><br>
+              </div>
+              <div id="outputbox" class="uiunit">
+                <div id="dicefield">
+                  <div id="die1" class="diecube"></div>
+                  <div id="die2" class="diecube"></div>
+                  <div id="die3" class="diecube"></div>
+                  <div id="die4" class="diecube"></div>
+                </div>
+              </div>
+          </div>
+          <script src="{% static 'js/style.js' %}"></script>
+	</body>
+</html>

@@ -1,0 +1,348 @@
+.diecube {
+    --size:120px; /* value in pixels, please */
+    --perspective:calc(var(--size) * 4); /* always 4 times the size */
+    --dicecolor:#def; /* lighter colors work best */
+    --cornercolor:#fff;
+    --bordercolor:#eee;
+    --cornerradius:calc(var(--size) * 0.18); /* best at 0.1 to 0.18 */
+    box-sizing: border-box;
+    display: inline-block;
+    position:relative;
+    background:transparent;
+    margin:calc(var(--size) * 0.25) calc(var(--size) * 0.3) calc(var(--size) * 0.5) calc(var(--size) * 0.3);
+    width: var(--size);
+    height: var(--size);
+    transform-style: preserve-3d;
+    transform: perspective(var(--perspective));
+    transform-origin: 50% 50% calc(var(--size) / 2);
+    cursor:pointer;
+    overflow:visible;
+    user-select: none;
+    border:0 none;
+    border-radius:var(--cornerradius);
+  }
+  .dieface {
+    height: var(--size);
+    width: var(--size);
+    position: absolute;left:0;top:0;
+    display: block;
+    border:2px solid var(--bordercolor);
+    border-radius:0;
+    box-shadow:1px 1px 1px var(--bordercolor), -1px -1px 1px var(--bordercolor);
+    transform-style: preserve-3d;
+    overflow:visible;
+    background: var(--dicecolor);
+    background:radial-gradient(ellipse at center, var(--dicecolor) 0%,var(--dicecolor) 35%,var(--cornercolor) 80%,var(--bordercolor) 100%);
+    opacity:1;
+  }
+  .dieface--back {
+    transform: rotateX(180deg);
+    transform-origin: right;
+  }
+  .dieface--right {
+    transform: rotateY(90deg);
+    transform-origin: right;
+  }
+  .dieface--left {
+    transform: rotateY(-90deg);
+    transform-origin: left;
+  }
+  .dieface--bottom {
+    transform: rotateX(-90deg);
+    transform-origin: bottom;
+  }
+  .dieface--top {
+    transform: rotateX(90deg);
+    transform-origin: top;
+  }
+  .dieface--front {
+    transform: translateZ(var(--size));
+    transform-origin: top;
+  }
+  .dot {
+    position:absolute;width:21%;height:21%;
+    background:radial-gradient(#666,#000);
+    border-radius:50%;border:2px solid #eee;
+    --dotmargin:var(--cornerradius);
+    --dotmid:40%;
+  }
+  .dot--1 {left:var(--dotmargin);top:var(--dotmargin);}
+  .dot--2 {left:var(--dotmid);top:var(--dotmargin);}
+  .dot--3 {right:var(--dotmargin);top:var(--dotmargin);}
+  .dot--4 {left:var(--dotmargin);top:var(--dotmid);}
+  .dot--5 {left:var(--dotmid);top:var(--dotmid);}
+  .dot--6 {right:var(--dotmargin);top:var(--dotmid);}
+  .dot--7 {left:var(--dotmargin);bottom:var(--dotmargin);}
+  .dot--8 {left:var(--dotmid);bottom:var(--dotmargin);}
+  .dot--9 {right:var(--dotmargin);bottom:var(--dotmargin);}
+  
+  /* Styles needed for the layout and user interface */
+  .wrapper {
+    --gridbordercolor:var(--accentcolor2);
+    --griditembordercolor:#193;
+  
+    overflow:hidden;
+  }
+  #dicefield {position:relative;top:20px;left:0;}
+  /* .container { 
+    margin:0 5% 1rem 5%;
+    padding: 0;
+    display: grid;  
+    grid-gap: 1px;  
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: repeat(auto-fit, auto); 
+    background:#ccc;
+  } */
+  .comment {text-align:left;}
+  .wrapper > .grid-box {
+    justify-self:center;
+  }
+  .examplehead {
+    justify-self:stretch;
+    margin:1rem 5% 1rem 5%;
+    padding: 0.5rem;
+    max-width: 90%;
+    text-align:left;
+    color:white;
+    background:var(--gridbordercolor);
+  }
+  #info, #outputbox {
+    padding: 2px 14px 20px 14px;
+    line-height:1.6;
+    background:#fff;
+  }
+  #info {text-align:center;}
+  #info ol, #info p {text-align:center;}
+  #info button {margin:1rem 0 1rem 1rem;min-width:auto;
+    padding:5px 10px 5px 10px;}
+  em {font-style:Poppins;}
+  
+  #outputbox {
+    position:relative;
+    min-height:400px;
+    text-align:center;
+    background:var(--accentcolor2);
+    overflow:visible;
+  }
+  code {font-family:"Courier New", monospace;font-weight:bold;color:#147;}
+  .elbox {
+    margin:0 auto 1rem auto;
+    width:96%;
+    max-width:600px;
+  }
+  .ellabel {
+    display:inline-block;
+    padding:0;
+    margin:1rem 0 0.5rem 1rem;
+    font-weight:bold;
+    color:black;
+  }
+  .textio {
+    font-size:1rem;
+    font-family:"Courier New",monospace;
+    height:4ex;
+    width:auto;
+    border-radius:8px;
+    box-shadow: 0 2px 2px -2px #369 inset;
+    padding:0.5rem;
+  }
+  .textio--number {
+    font-family:"Courier New", monospace;
+    width:auto;
+    max-width:5rem;
+    text-align:center;
+  }
+  #inputFld {width:100%;height:auto;min-height:auto;max-height:auto;background:#efefef;}
+  #rollResult {
+    padding:0;
+    margin:0 20px 0 5px;
+    white-space:nowrap;
+  }
+  .rangestyle {
+    text-align:left;
+    padding:0;
+    margin:0 0 2rem 0;
+    --uimargin:10px 0 10px 0;
+    --uiborderfocuscolor:#158;
+    --rangewidth:200px;
+    --rangeheight:30px;
+    --thumbwidth:30px;
+    --thumbheight:30px;
+    --thumbborderradius:50%;
+    --thumbcolor:#c00;
+    --uibordercolor:#ccc;
+    --uibackground:#FDD835;
+    --uiborderradius:15px;
+    --thumbboxshadow:0 none;
+  }
+  .rangestyle--style3 {
+    --rangewidth:95%;
+    --rangeheight:40px;
+    --thumbwidth:40px;
+    --thumbheight:40px;
+    --thumbcolor:linear-gradient(to right, #000 0, #666 10%, #333 50%, #666 90%, #000 100%);
+    --uibordercolor:#ccc;
+    --uibackground:silver;
+    --uiborderradius:4px;
+    --thumbborderradius:4px;
+    --thumbboxshadow:-300px 0 0 300px var(--accentcolor2);
+  }
+  .rangestyle__rangebox {
+    width:var(--rangewidth);
+    height:var(--rangeheight);
+    display:inline-block;
+    margin:var(--uimargin);
+    border:0 none;
+    border-radius:var(--uiborderradius);
+    position:relative;
+  }
+  .rangestyle__rangebox  input[type="range"] {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    width:var(--rangewidth);
+    height:var(--rangeheight);
+    background: var(--uibackground);
+    border:1px solid var(--uibordercolor);
+    outline: none; /* Remove outline */
+    opacity: 0.8; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+    transition: opacity 0.2s;
+    border-radius:var(--uiborderradius);
+    overflow:hidden;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5) inset;
+  }
+  
+  .rangestyle__rangebox  input[type="range"]:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+  .rangestyle__rangebox  input[type="range"]:focus {
+    opacity: 1; /* Fully shown on focus */
+    border:1px solid var(--uiborderfocuscolor);
+  
+  }
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  .rangestyle__rangebox  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    width: var(--thumbwidth); /* Set a specific slider handle width */
+    height: var(--thumbheight); /* Slider handle height */
+    background: var(--thumbcolor);
+    border-radius:var(--thumbborderradius);
+    cursor: pointer; /* Cursor on hover */
+    box-shadow: var(--thumbboxshadow);
+  }
+  
+  .rangestyle__rangebox  input[type="range"]::-moz-range-thumb {
+    width: var(--thumbwidth); /* Set a specific slider handle width */
+    height: var(--thumbheight); /* Slider handle height */
+    background: var(--thumbcolor);
+    border-radius:var(--thumbborderradius);
+    cursor: pointer; /* Cursor on hover */
+    box-shadow: var(--thumbboxshadow);
+  }
+  
+  /*checkbox style*/
+  .customcheckbox {
+    position:relative;
+    display:inline-block;
+    margin:0 auto;
+    width:auto;
+    text-align:left;
+    --checksize:1.6rem;
+    line-height:calc(var(--checksize) * 1.1);
+    font-size:calc(var(--checksize) * 0.7);
+  }
+  .customcheckbox  input[type="checkbox"] {opacity:0;}
+  .customcheckbox label {cursor:pointer;position:relative;
+    --bordercolor:#1577D0;
+    --checkcolor:#000;
+    left:calc(var(--checksize) * 0.7);
+  }
+  .customcheckbox label::before, .customcheckbox label::after {
+    content: "";
+    display:inline-block;
+    position:absolute;
+  }
+  .customcheckbox label::before {
+    height:calc(var(--checksize) * 0.75);
+    width:calc(var(--checksize) * 0.75);
+    left:calc(var(--checksize) * -1);
+    top:0;
+  }
+  .customcheckbox input[type="checkbox"] + label::before {
+    border:calc(var(--checksize) * 0.1) solid var(--bordercolor);
+    background:#ccc;
+  }
+  .customcheckbox input[type="checkbox"]:checked + label::before {
+    background:#ffc;
+  }
+  .customcheckbox input[type="checkbox"]:focus + label::before {
+    outline: var(--bordercolor) auto calc(var(--checksize) * 0.13);
+  }
+  .customcheckbox label::after {
+    height:calc(var(--checksize) * 0.2);
+    width:calc(var(--checksize) * 0.45);
+    border-left:calc(var(--checksize) * 0.1) solid var(--checkcolor);
+    border-bottom:calc(var(--checksize) * 0.08) solid var(--checkcolor);
+    transform: rotate(-50deg);
+    left:calc(var(--checksize) * -0.86);
+    top:calc(var(--checksize) * 0.25);
+  }
+  .customcheckbox input[type="checkbox"] + label::after {
+    content:none;
+  }
+  .customcheckbox input[type="checkbox"]:checked + label::after {
+    content:"";
+  }
+  
+  /* Styles not needed but kept here for future reference */
+  
+  /* 
+  Too many rotated divs were impossible for some browsers and devices to render efficiently.
+  So, the rules below were not needed.
+  
+  .dieface::after {
+    content:"";
+    opacity:1;
+    height: calc(var(--size) - 2px);
+    width: calc(var(--size) - 2px);
+    position: absolute;left:0;top:0;
+    display: block;
+    border-radius:var(--cornerradius);
+    background: var(--cornercolor);  
+    transform-style: preserve-3d;
+    border:1px solid var(--cornercolor);
+    transform: translateZ(-1px);
+    transform-origin: left;
+  } 
+  .dieface--innercube{
+    border:1px solid var(--dicecolor);
+    transform: translateZ(calc(-1 * var(--cornerradius)));
+    transform-origin: left;
+    background:var(--cornercolor);
+    border-radius:0;
+  }
+  .dieface--inner {
+    background:var(--cornercolor);
+    border:1px solid var(--dicecolor);
+    border:0 none;
+    border-radius:0;
+    opacity:1;
+  }
+  .dieface--leftinner {
+    transform: rotateY(-90deg) translateZ(calc( var(--cornerradius) - var(--size) ));
+    transform-origin: left;
+  }
+  .dieface--rightinner {
+    transform: rotateY(-90deg) translateZ(calc(var(--cornerradius) * -1));
+    transform-origin: left;
+  }
+  .dieface--backinner {
+    transform: translateZ(var(--cornerradius));
+    transform-origin: left;
+  }
+  .dieface--frontinner {
+    width:var(--size);
+    transform: translateZ(calc(var(--size) - var(--cornerradius)));
+    transform-origin: left;
+  } 
+  */
+  
